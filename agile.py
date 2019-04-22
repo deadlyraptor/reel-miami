@@ -12,7 +12,7 @@ class AgileSchedule():
         Parameters
         ----------
 
-        start_time : obj
+        start_time : datetime
             The showtime for the film as a datetime object.
         buy_link : str
             A link to the direct Agile ticketing page for the given showtime.
@@ -46,7 +46,6 @@ class AgileEvent():
                 A collection of instances of Agile Schedule, that is, showtimes
                 for the film.
         """
-
         self.name = name
         self.external_id = external_id
         self.duration = duration
@@ -87,7 +86,7 @@ class AgileEvent():
 def build_agile_venue_url(guid, date):
     """Builds a valid URL to access the Agile WebSales Feed for a given venue.
 
-    Paramters
+    Parameters
     ---------
     guid: str
         The unique identifier for the Entry Point link in the Agile system.
@@ -97,6 +96,7 @@ def build_agile_venue_url(guid, date):
     str
         A complete URL.
     """
+
     date = f'&startdate={date}&enddate={date}'
     agile_venue_url = (
                       f'{Config.AGILE_WEBSALES_URL}'

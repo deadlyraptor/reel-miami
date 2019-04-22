@@ -22,7 +22,7 @@
         </div>
         <ol class="showtimes">
           {% for showtime in film.showtimes %}
-            <li class="showtime"><a href="{{ showtime.buy_link }}">{{ showtime.start_time.strftime('%I:%M%p').lower().lstrip('0') }}</a></li>
+            <li class="showtime"><a href="{{ showtime.buy_link }}">{{ showtime.start_time|format_showtime }}</a></li>
           {% endfor %}
         </ol>
       </div>
