@@ -30,7 +30,7 @@ class AgileSchedule():
 class AgileEvent():
     """A class used to represent Agile events, aka films."""
 
-    def __init__(self, name, external_id, duration, showtimes):
+    def __init__(self, name, info_link, duration, showtimes):
         """
         Parameters
         ----------
@@ -47,7 +47,7 @@ class AgileEvent():
                 for the film.
         """
         self.name = name
-        self.external_id = external_id
+        self.info_link = info_link
         self.duration = duration
         self.showtimes = showtimes
 
@@ -73,14 +73,14 @@ class AgileEvent():
             Instance of class AgileEvent.
         """
         name = agile_dict['Name']
-        external_id = agile_dict['ExternalID']
+        info_link = agile_dict['InfoLink']
         duration = agile_dict['Duration']
         showtimes = []
         for showing in agile_dict['CurrentShowings']:
             start_time = dateutil.parser.parse(showing['StartDate'])
             buy_link = showing['LegacyPurchaseLink']
             showtimes.append(AgileSchedule(start_time, buy_link))
-        return AgileEvent(name, external_id, duration, showtimes)
+        return AgileEvent(name, info_link, duration, showtimes)
 
 
 def build_agile_venue_url(guid, date):

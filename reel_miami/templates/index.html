@@ -10,42 +10,18 @@
   <div class="venues-container">
     <div class="venue-container">
       <div class="venue-name">
-        <h3>Coral Gables Art Cinema</h3>
+        <h3><a href="http://gablescinema.com">Coral Gables Art Cinema</a></h3>
       </div>
       {% for film in cgac_films %}
-      <div class="screening">
-        <div>
-          <a href="http://www.gablescinema.com/events/{{ film.external_id }}">{{ film.name }}</a>
-        </div>
-        <div class="screening-details">
-          <span class="detail">{{ film.duration }} min</span>
-        </div>
-        <ol class="showtimes">
-          {% for showtime in film.showtimes %}
-            <li class="showtime"><a href="{{ showtime.buy_link }}">{{ showtime.start_time|format_showtime }}</a></li>
-          {% endfor %}
-        </ol>
-      </div>
+        {% include "snippets/film-snippet.html" %}
       {% endfor %}
     </div>
     <div class="venue-container">
       <div class="venue-name">
-        <h3>O Cinema Miami Beach</h3>
+        <h3><a href="https://www.o-cinema.org/">O Cinema Miami Beach</a></h3>
       </div>
       {% for film in omb_films %}
-      <div class="screening">
-        <div>
-          <a href="https://www.o-cinema.org/event/{{ film.name.lower() }}">{{ film.name }}</a>
-        </div>
-        <div class="screening-details">
-          <span class="detail">{{ film.duration }} min</span>
-        </div>
-        <ol class="showtimes">
-          {% for showtime in film.showtimes %}
-            <li class="showtime"><a href="{{ showtime.buy_link }}">{{ showtime.start_time.strftime('%I:%M%p').lower().lstrip('0') }}</a></li>
-          {% endfor %}
-        </ol>
-      </div>
+        {% include "snippets/film-snippet.html" %}
       {% endfor %}
     </div>
   </div>
