@@ -4,7 +4,7 @@ filters = Blueprint('filter', __name__)
 
 
 @filters.app_template_filter()
-def format_showtime(value, format=('%I:%M%p')):
+def format_showtime(value):
     """Converts datetime object to string containing only the showtime.
 
     Example:
@@ -15,13 +15,32 @@ def format_showtime(value, format=('%I:%M%p')):
     ----------
     value: datetime
         The date and time for the given showtime.
-    format: str
-        The format string.
 
     Returns
     -------
     str
-        The showtime for the film.
+        The showtime for the film, with am/pm in lowercase and stripped of
+        leading 0.
     """
 
-    return value.strftime(format).lower().lstrip('0')
+    showtime = value.strftime('%I:%M%p').lower().lstrip('0')
+    return showtime
+
+
+@filters.app_template_filter()
+def format_runtime(value):
+    """
+
+    Parameters
+    ---------
+    value: str
+        The runtime of the film in minutes.
+
+    Returns
+    -------
+    str
+        The runtime for the film formatted as X hr Y min.
+    """
+
+    runtime = f'{int(value) // 60} hr {int(value) % 60} min'
+    return runtime
