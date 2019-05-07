@@ -4,29 +4,6 @@ import requests
 from reel_miami import Config
 
 
-class AgileSchedule():
-    """A class used to represent the schedule for an Agile event."""
-
-    def __init__(self, start_time, buy_link):
-        """
-        Parameters
-        ----------
-
-        start_time : datetime
-            The showtime for the film as a datetime object.
-        buy_link : str
-            A link to the direct Agile ticketing page for the given showtime.
-        """
-        self.start_time = start_time
-        self.buy_link = buy_link
-
-    def __repr__(self):
-        return f'<Showtime {self.start_time}>'
-
-    def __str__(self):
-        return f'{self.start_time}'
-
-
 class AgileEvent():
     """A class used to represent Agile events, aka films."""
 
@@ -34,17 +11,15 @@ class AgileEvent():
         """
         Parameters
         ----------
-            name : str
-                The name of the event.
-            external_id : str
-                The external id of the event, used to build the URL to the
-                event's page on the organization's website; note that not all
-                organizations use the external id in this way.
-            duration : str
-                The duration of the event.
-            showtimes : list
-                A collection of instances of Agile Schedule, that is, showtimes
-                for the film.
+        name : str
+            The name of the event.
+        info_link : str
+            The link to the event info page on the Agile website.
+        duration : str
+            The duration of the event.
+        showtimes : list
+            A collection of instances of Agile Schedule, that is, showtimes
+            for the film.
         """
         self.name = name
         self.info_link = info_link
@@ -83,12 +58,34 @@ class AgileEvent():
         return AgileEvent(name, info_link, duration, showtimes)
 
 
+class AgileSchedule():
+    """A class used to represent the schedule for an Agile event."""
+
+    def __init__(self, start_time, buy_link):
+        """
+        Parameters
+        ----------
+        start_time : datetime
+            The showtime for the film as a datetime object.
+        buy_link : str
+            A link to the direct Agile ticketing page for the given showtime.
+        """
+        self.start_time = start_time
+        self.buy_link = buy_link
+
+    def __repr__(self):
+        return f'<Showtime {self.start_time}>'
+
+    def __str__(self):
+        return f'{self.start_time}'
+
+
 def build_agile_venue_url(guid, date):
     """Builds a valid URL to access the Agile WebSales Feed for a given venue.
 
     Parameters
     ---------
-    guid: str
+    guid : str
         The unique identifier for the Entry Point link in the Agile system.
 
     Returns
