@@ -11,38 +11,50 @@
       <div class="venue-name">
         <h3><a href="http://gablescinema.com">Coral Gables Art Cinema</a></h3>
       </div>
-      {% for film in cgac_films %}
-        {% include "snippets/film-snippet.html" %}
-      {% endfor %}
+      {% if cgac_films %}
+        {% for film in cgac_films %}
+          {% include "snippets/film-snippet.html" %}
+        {% endfor %}
+      {% else %}
+        {% include "snippets/no-films-snippet.html" %}
+      {% endif %}
     </div>
     <div class="venue-container">
       <div class="venue-name">
         <h3><a href="https://www.o-cinema.org/">O Cinema Miami Beach</a></h3>
       </div>
-      {% for film in omb_films %}
-        {% include "snippets/film-snippet.html" %}
-      {% endfor %}
+      {% if omb_films %}
+        {% for film in omb_films %}
+          {% include "snippets/film-snippet.html" %}
+        {% endfor %}
+      {% else %}
+        {% include "snippets/no-films-snippet.html" %}
+      {% endif %}
     </div>
     <div class="venue-container">
       <div class="venue-name">
         <h3><a href="http://mbcinema.com/">Miami Beach Cinematheque</a></h3>
       </div>
-      {% for film in mbc_films %}
-      <div class="screening">
-        <div>
-          <a href="{{ film.info_link }}">{{ film.name }}</a>
+      {% if mbc_films %}
+        {% for film in mbc_films %}
+        <div class="screening">
+          <div>
+            <a href="{{ film.info_link }}">{{ film.name }}</a>
+          </div>
+          <ol class="showtimes">
+            <li class="showtime">
+              <a href="{{ film.showtimes.buy_link }}">
+                <time datetime="{{ film.showtimes.start_time }}">
+                  {{ film.showtimes.start_time }}
+                </time>
+              </a>
+            </li>
+          </ol>
         </div>
-        <ol class="showtimes">
-          <li class="showtime">
-            <a href="{{ film.showtimes.buy_link }}">
-              <time datetime="{{ film.showtimes.start_time }}">
-                {{ film.showtimes.start_time }}
-              </time>
-            </a>
-          </li>
-        </ol>
-      </div>
-      {% endfor %}
+        {% endfor %}
+      {% else %}
+        {% include "snippets/no-films-snippet.html" %}
+      {% endif %}
     </div>
   </div>
 {% endblock content %}

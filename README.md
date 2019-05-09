@@ -1,14 +1,16 @@
 Reel Miami
 ==========
 
-An open-source website listing all films and their screening times at art house 
+An open-source website listing all films and their screening times at art house
 cinemas in Miami-Dade County. It deliberately excludes films showing at the multiplexes.
 
 Built With
 ----------
 
 - [Flask](http://flask.pocoo.org)
+- [FlaskSQLAlchemy](https://github.com/pallets/flask-sqlalchemy)
 - [requests](https://2.python-requests.org/en/master/)
+- [feedparser](https://github.com/kurtmckee/feedparser)
 
 Contributing
 ------------

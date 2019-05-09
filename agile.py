@@ -121,10 +121,13 @@ def fetch_events(agile_venue_url):
     response = requests.get(agile_venue_url)
     feed = json.loads(response.text)
     films = []
-    events = feed['ArrayOfShows']
-    for event in events:
-        film = AgileEvent.from_agile_dict(event)
-        films.append(film)
+    if len(feed) == 3:
+        pass
+    else:
+        events = feed['ArrayOfShows']
+        for event in events:
+            film = AgileEvent.from_agile_dict(event)
+            films.append(film)
 
     # Sorts the list of films by their showtimes otherwise they would be
     # displayed alphabetically.
