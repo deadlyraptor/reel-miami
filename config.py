@@ -21,3 +21,6 @@ class Config():
 
     # Miami Beach Cinematheque RSS feed
     MBC_RSS = os.environ.get('MBC_RSS')
+
+    # Tower Theater Miami ticketing URL
+    TOWER_TIX = os.environ.get('TOWER_TIX')
