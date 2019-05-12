@@ -2,6 +2,7 @@ from datetime import datetime
 from flask import Blueprint, render_template
 from agile import build_agile_venue_url, fetch_events
 from rss import fetch_mbc_events
+from tower import fetch_tower_events
 from reel_miami import Config
 
 main = Blueprint('main', __name__)
@@ -21,5 +22,8 @@ def index():
 
     mbc_films = fetch_mbc_events(today)
 
+    tower_films = fetch_tower_events(today)
+
     return render_template('index.html', title='Home', cgac_films=cgac_films,
-                           omb_films=omb_films, mbc_films=mbc_films)
+                           omb_films=omb_films, mbc_films=mbc_films,
+                           tower_films=tower_films)

@@ -7,6 +7,7 @@
     </p>
   </div>
   <div class="venues-container">
+    <!-- Coral Gables Art Cinema -->
     <div class="venue-container">
       <div class="venue-name">
         <h3><a href="http://gablescinema.com">Coral Gables Art Cinema</a></h3>
@@ -19,6 +20,7 @@
         {% include "snippets/no-films-snippet.html" %}
       {% endif %}
     </div>
+    <!-- O Cinema Miami Beach -->
     <div class="venue-container">
       <div class="venue-name">
         <h3><a href="https://www.o-cinema.org/">O Cinema Miami Beach</a></h3>
@@ -31,6 +33,7 @@
         {% include "snippets/no-films-snippet.html" %}
       {% endif %}
     </div>
+    <!-- Miami Beach Cinematheque -->
     <div class="venue-container">
       <div class="venue-name">
         <h3><a href="http://mbcinema.com/">Miami Beach Cinematheque</a></h3>
@@ -49,6 +52,34 @@
                 </time>
               </a>
             </li>
+          </ol>
+        </div>
+        {% endfor %}
+      {% else %}
+        {% include "snippets/no-films-snippet.html" %}
+      {% endif %}
+    </div>
+    <!-- Tower Theater Miami -->
+    <div class="venue-container">
+      <div class="venue-name">
+        <h3><a href="https://towertheatermiami.com">Tower Theater Miami</a></h3>
+      </div>
+      {% if tower_films %}
+        {% for film in tower_films %}
+        <div class="screening">
+          <div>
+            {{ film.name }}
+          </div>
+          <ol class="showtimes">
+            {% for showtime in film.showtimes %}
+            <li class="showtime">
+              <a href="{{ showtime.buy_link }}">
+                <time datetime="{{ showtime.start_time.lower() }}">
+                  {{ showtime.start_time.lower() }}
+                </time>
+              </a>
+            </li>
+            {% endfor %}
           </ol>
         </div>
         {% endfor %}
