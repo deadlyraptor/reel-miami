@@ -1,136 +1,108 @@
-import json
+from dataclasses import dataclass
 import dateutil.parser
 import requests
-from reel_miami import Config
+from film import FilmEvent, FilmSchedule
 
 
-class AgileEvent():
-    """A class used to represent Agile events, aka films."""
+@dataclass
+class AgileEvent(FilmEvent):
+    """A subclass used for methods specific to Agile Ticketing venues.
 
-    def __init__(self, name, info_link, duration, showtimes):
-        """
+    Parameters
+    ----------
+    duration : str
+        The duration of the event.
+
+        This defaults to None because the last parameter in the parent class
+        defaults to None.
+    """
+
+    duration: str = None
+
+    def build_agile_payload(guid, date):
+        """Builds the parameters to be sent to the URL's query string in order
+         to access a given venue's Agile WebSales Feed.
+
         Parameters
-        ----------
-        name : str
-            The name of the event.
-        info_link : str
-            The link to the event info page on the Agile website.
-        duration : str
-            The duration of the event.
-        showtimes : list
-            A collection of instances of Agile Schedule, that is, showtimes
-            for the film.
+        ---------
+        guid : str
+            The unique identifier for the Entry Point link in the Agile system.
+        date : str
+            The date for which to pull showtimes.
+
+        Returns
+        -------
+        payload
+            The parameters to send in the URL's query string as a dictionary.
         """
-        self.name = name
-        self.info_link = info_link
-        self.duration = duration
-        self.showtimes = showtimes
 
-    def __repr__(self):
-        return f'<Film {self.name}>'
+        payload = {'guid': guid, 'showslist': 'true', 'format': 'json',
+                   'startdate': date, 'enddate': date}
 
-    def __str__(self):
-        return f'{self.name}'
+        return payload
 
-    @classmethod
-    def from_agile_dict(cls, agile_dict):
+    def from_agile_dict(event):
         """Instantiates both AgileEvent and AgileSchedule using the dictionary
         pulled from the Agile WebSales Feed (JSON-formatted).
 
         Parameters
         ----------
-        agile_dict
-            # TODO description
+        event
+            A dictionary (JSON) containing the info for an event in the Agile
+            WebSales Feed.
+
+            It includes a subdictionary called CurrentShowings that contains
+            the showtimes for the event.
 
         Returns
         -------
-        class
+        AgileEvent
             Instance of class AgileEvent.
         """
-        name = agile_dict['Name']
-        info_link = agile_dict['InfoLink']
-        duration = agile_dict['Duration']
+
+        name = event['Name']
+        film_link = event['InfoLink']
+        duration = event['Duration']
         showtimes = []
-        for showing in agile_dict['CurrentShowings']:
+        for showing in event['CurrentShowings']:
             start_time = dateutil.parser.parse(showing['StartDate'])
-            buy_link = showing['LegacyPurchaseLink']
-            showtimes.append(AgileSchedule(start_time, buy_link))
-        return AgileEvent(name, info_link, duration, showtimes)
+            ticketing_link = showing['LegacyPurchaseLink']
+            showtimes.append(FilmSchedule(start_time, ticketing_link))
 
+        return AgileEvent(name, showtimes, film_link, duration)
 
-class AgileSchedule():
-    """A class used to represent the schedule for an Agile event."""
+    def fetch_events(payload):
+        """Makes a request to the Agile WebSales Feed, instatiates each film
+        in the response, then appends each instance to a list.
 
-    def __init__(self, start_time, buy_link):
-        """
         Parameters
         ----------
-        start_time : datetime
-            The showtime for the film as a datetime object.
-        buy_link : str
-            A link to the direct Agile ticketing page for the given showtime.
+        payload : dict
+            The parameters to send in the URL's query string as a dictionary.
+
+        Returns
+        -------
+        films
+            A list populated by instances of AgileEvent.
+
+            The list is sorted by the showtimes otherwise they would be listed
+            alphabetically.
         """
-        self.start_time = start_time
-        self.buy_link = buy_link
 
-    def __repr__(self):
-        return f'<Showtime {self.start_time}>'
+        response = requests.get('https://prod3.agileticketing.net/websales/feed.ashx?',
+                                params=payload)
+        feed = response.json()
+        films = []
+        # the feed returns a truncated dictionary if the venue has no events so
+        # this conditional statement checks that the required data exists
+        if len(feed) == 3:
+            pass
+        else:
+            events = feed['ArrayOfShows']
+            for event in events:
+                film = AgileEvent.from_agile_dict(event)
+                films.append(film)
 
-    def __str__(self):
-        return f'{self.start_time}'
+        films.sort(key=lambda film: film.showtimes[0].start_time)
 
-
-def build_agile_venue_url(guid, date):
-    """Builds a valid URL to access the Agile WebSales Feed for a given venue.
-
-    Parameters
-    ---------
-    guid : str
-        The unique identifier for the Entry Point link in the Agile system.
-
-    Returns
-    -------
-    str
-        A complete URL.
-    """
-
-    date = f'&startdate={date}&enddate={date}'
-    agile_venue_url = (
-                      f'{Config.AGILE_WEBSALES_URL}'
-                      f'{guid}'
-                      f'{Config.AGILE_PARAMETERS}{date}'
-                      )
-    return agile_venue_url
-
-
-def fetch_events(agile_venue_url):
-    """Makes a request to the Agile WebSales Feed. Using the returned JSON
-    data, the function then instantiates each film and appends it to a list.
-
-    Parameters
-    ----------
-    date : str
-        A date in format YYYY-M-D, e.g. 2019-4-9
-
-    Returns
-    -------
-    list
-        Populated by instances of AgileEvent and sorted by the start time.
-    """
-
-    response = requests.get(agile_venue_url)
-    feed = json.loads(response.text)
-    films = []
-    if len(feed) == 3:
-        pass
-    else:
-        events = feed['ArrayOfShows']
-        for event in events:
-            film = AgileEvent.from_agile_dict(event)
-            films.append(film)
-
-    # Sorts the list of films by their showtimes otherwise they would be
-    # displayed alphabetically.
-    films.sort(key=lambda film: film.showtimes[0].start_time)
-
-    return films
+        return films

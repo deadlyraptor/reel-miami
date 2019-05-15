@@ -38,7 +38,7 @@ class FilmEvent:
 
     name: str
     showtimes: List[FilmSchedule]
-    film_link: str = None
+    film_link: str = None  # not all feeds supply this URL
 
     def __str__(self):
         return f'{self.name}'
