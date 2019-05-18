@@ -71,7 +71,7 @@ class AgileEvent(FilmEvent):
 
         return AgileEvent(name, showtimes, film_link, duration)
 
-    def fetch_events(payload):
+    def fetch_agile_events(payload):
         """Makes a request to the Agile WebSales Feed, instatiates each film
         in the response, then appends each instance to a list.
 

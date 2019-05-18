@@ -9,7 +9,7 @@
     {% for showtime in film.showtimes %}
       <li class="showtime">
         <a href="{{ showtime.buy_link }}">
-          <time datetime="{{ showtime.start_time|format_showtime }}">
+          <time datetime="{{ showtime.start_time }}">
             {{ showtime.start_time|format_showtime }}
           </time>
         </a>
