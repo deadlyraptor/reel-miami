@@ -15,13 +15,13 @@ class AgileEvent(FilmEvent):
 
         This defaults to None because the last parameter in the parent class
         defaults to None.
+
     """
 
     duration: str = None
 
     def build_agile_payload(guid, date):
-        """Builds the parameters to be sent to the URL's query string in order
-         to access a given venue's Agile WebSales Feed.
+        """Build the parameters for the WebSales URL request.
 
         Parameters
         ---------
@@ -34,16 +34,18 @@ class AgileEvent(FilmEvent):
         -------
         payload
             The parameters to send in the URL's query string as a dictionary.
-        """
 
+        """
         payload = {'guid': guid, 'showslist': 'true', 'format': 'json',
                    'startdate': date, 'enddate': date}
 
         return payload
 
     def from_agile_dict(event):
-        """Instantiates both AgileEvent and AgileSchedule using the dictionary
-        pulled from the Agile WebSales Feed (JSON-formatted).
+        """Instantiate both AgileEvent and AgileSchedule.
+
+        The class parameters are pulled from a dictionary provided by the
+        Agile WebSales Feed (JSON format).
 
         Parameters
         ----------
@@ -58,8 +60,8 @@ class AgileEvent(FilmEvent):
         -------
         AgileEvent
             Instance of class AgileEvent.
-        """
 
+        """
         name = event['Name']
         film_link = event['InfoLink']
         duration = event['Duration']
@@ -72,8 +74,7 @@ class AgileEvent(FilmEvent):
         return AgileEvent(name, showtimes, film_link, duration)
 
     def fetch_agile_events(payload):
-        """Makes a request to the Agile WebSales Feed, instatiates each film
-        in the response, then appends each instance to a list.
+        """Make a request to the Agile WebSales Feed and build a list of films.
 
         Parameters
         ----------
@@ -87,10 +88,10 @@ class AgileEvent(FilmEvent):
 
             The list is sorted by the showtimes otherwise they would be listed
             alphabetically.
-        """
 
-        response = requests.get('https://prod3.agileticketing.net/websales/feed.ashx?',
-                                params=payload)
+        """
+        base_agile_url = 'https://prod3.agileticketing.net/websales/feed.ashx?'
+        response = requests.get(base_agile_url, params=payload)
         feed = response.json()
         films = []
         # the feed returns a truncated dictionary if the venue has no events so

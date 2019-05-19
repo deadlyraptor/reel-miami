@@ -1,6 +1,6 @@
 <div class="screening">
   <div>
-    <a href="{{ film.info_link }}">{{ film.name }}</a>
+    <a href="{{ film.film_link }}">{{ film.name }}</a>
   </div>
   <div class="screening-details">
     <span class="detail">{{ film.duration }} min</span>
@@ -8,7 +8,7 @@
   <ol class="showtimes">
     {% for showtime in film.showtimes %}
       <li class="showtime">
-        <a href="{{ showtime.buy_link }}">
+        <a href="{{ showtime.ticketing_link }}">
           <time datetime="{{ showtime.start_time }}">
             {{ showtime.start_time|format_showtime }}
           </time>

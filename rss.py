@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from datetime import datetime, timezone
-import dateutil.parser
 import feedparser
 from film import FilmEvent, FilmSchedule
 from config import Config
@@ -23,15 +22,19 @@ class MBCEvent(FilmEvent):
     """A subclass used for methods specific to the MBC RSS feed."""
 
     def rename(title):
-        """Strips the title of the event from the title element in the RSS feed
+        """Strip the title of the event from the title element in the RSS feed.
 
         Parameters
         ----------
         title : str
-            The raw title, e.g.
-            Miami Theatrical Premiere! THE ROOM by Tommy Wiseau
+            The raw title from the RSS feed.
 
-            The string will be split on the exclamation mark and the word by.
+            MBC events are titled in one of two ways. The conditional block
+            accounts for both formats and splits the text accordingly.
+
+            Examples titles:
+            Miami Theatrical Premiere! THE ROOM by Tommy Wiseau
+            "BAD MOVIES 101" A series: THE ROOM by Tommy Wiseau
 
         Returns
         -------
@@ -39,13 +42,15 @@ class MBCEvent(FilmEvent):
             The title of the film (title cased) as a string.
 
         """
-
-        name = title.split('! ')[1].split(' by')[0].title()
+        if title.startswith('"'):
+            name = title.split(': ')[1].split(' by')[0].title()
+        else:
+            name = title.split('! ')[1].split(' by')[0].title()
 
         return name
 
     def gmt_to_local(gmt_datetime):
-        """Converts the GMT date & time from the RSS feed into local (UTC) time.
+        """Convert GMT date & time from the RSS feed into local (UTC) time.
 
         Parameters
         ----------
@@ -56,8 +61,8 @@ class MBCEvent(FilmEvent):
         -------
         datetime
             The date and time of the event in 24-hour EST time.
-        """
 
+        """
         local_time = gmt_datetime.replace(tzinfo=timezone.utc).astimezone(tz=None)
 
         return local_time

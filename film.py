@@ -13,6 +13,7 @@ class FilmSchedule:
         The showtime for the screening.
     ticketing_link : str
         The URL to the screening's ticketing page.
+
     """
 
     start_time: datetime
@@ -34,6 +35,7 @@ class FilmEvent:
         A collection of instances of FilmSchedule.
     film_link : str
         The URL to the film's info page.
+
     """
 
     name: str
