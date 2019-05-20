@@ -66,22 +66,7 @@
       </div>
       {% if tower_films %}
         {% for film in tower_films %}
-        <div class="screening">
-          <div>
-            {{ film.name }}
-          </div>
-          <ol class="showtimes">
-            {% for showtime in film.showtimes %}
-            <li class="showtime">
-              <a href="{{ showtime.ticketing_link }}">
-                <time datetime="{{ showtime.start_time }}">
-                  {{ showtime.start_time|format_showtime }}
-                </time>
-              </a>
-            </li>
-            {% endfor %}
-          </ol>
-        </div>
+          {% include "snippets/film-snippet.html" %}
         {% endfor %}
       {% else %}
         {% include "snippets/no-films-snippet.html" %}

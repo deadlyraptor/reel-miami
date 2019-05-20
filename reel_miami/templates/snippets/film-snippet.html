@@ -1,10 +1,16 @@
 <div class="screening">
   <div>
-    <a href="{{ film.film_link }}">{{ film.name }}</a>
+    {% if film.film_link %}
+      <a href="{{ film.film_link }}">{{ film.name }}</a>
+    {% else %}
+      {{ film.name }}
+    {% endif %}
   </div>
+  {% if film.duration %}
   <div class="screening-details">
     <span class="detail">{{ film.duration }} min</span>
   </div>
+  {% endif %}
   <ol class="showtimes">
     {% for showtime in film.showtimes %}
       <li class="showtime">
