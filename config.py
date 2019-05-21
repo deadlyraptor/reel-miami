@@ -24,3 +24,6 @@ class Config():
 
     # Tower Theater Miami ticketing URL
     TOWER_TIX = os.environ.get('TOWER_TIX')
+
+    # Cosford Cinema base calendar day URL
+    COSFORD_TIX = os.environ.get('COSFORD_TIX')

@@ -72,5 +72,18 @@
         {% include "snippets/no-films-snippet.html" %}
       {% endif %}
     </div>
+    <!-- Cosford Cinema -->
+    <div class="venue-container">
+      <div class="venue-name">
+        <h3><a href="http://www.cosfordcinema.com/">Cosford Cinema</a></h3>
+      </div>
+      {% if cosford_films %}
+        {% for film in cosford_films %}
+          {% include "snippets/film-snippet.html" %}
+        {% endfor %}
+      {% else %}
+        {% include "snippets/no-films-snippet.html" %}
+      {% endif %}
+    </div>
   </div>
 {% endblock content %}

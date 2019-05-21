@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask import Blueprint, render_template
-from ..feeds import agile, rss, tower
-from reel_miami import Config
+from ..feeds import agile, rss, tower, cosford
+from config import Config
 
 main = Blueprint('main', __name__)
 
@@ -24,8 +24,11 @@ def index():
 
     tower_films = tower.fetch_tower_events(today)
 
+    cosford_films = cosford.fetch_cosford_events(today)
+
     return render_template('index.html', title='Home',
                            cgac_films=cgac_films,
                            omb_films=omb_films,
                            mbc_films=mbc_films,
-                           tower_films=tower_films)
+                           tower_films=tower_films,
+                           cosford_films=cosford_films)
