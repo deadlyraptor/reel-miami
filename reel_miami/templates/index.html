@@ -40,20 +40,7 @@
       </div>
       {% if mbc_films %}
         {% for film in mbc_films %}
-        <div class="screening">
-          <div>
-            <a href="{{ film.film_link }}">{{ film.name }}</a>
-          </div>
-          <ol class="showtimes">
-            <li class="showtime">
-              <a href="{{ film.showtimes.ticketing_link }}">
-                <time datetime="{{ film.showtimes.start_time }}">
-                  {{ film.showtimes.start_time|format_showtime }}
-                </time>
-              </a>
-            </li>
-          </ol>
-        </div>
+            {% include "snippets/film-snippet.html" %}
         {% endfor %}
       {% else %}
         {% include "snippets/no-films-snippet.html" %}

@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import Blueprint, render_template
-from ..feeds import agile, rss, tower, cosford
+from ..feeds import agile, mbc, tower, cosford
 from config import Config
 
 main = Blueprint('main', __name__)
@@ -20,7 +20,7 @@ def index():
     cgac_films = agile.AgileEvent.fetch_agile_events(cgac_feed_url)
     omb_films = agile.AgileEvent.fetch_agile_events(omb_feed_url)
 
-    mbc_films = rss.MBCEvent.fetch_mbc_events(today)
+    mbc_films = mbc.MBCEvent.fetch_mbc_events(today)
 
     tower_films = tower.fetch_tower_events(today)
 
