@@ -20,27 +20,6 @@ class AgileEvent(FilmEvent):
 
     duration: str = None
 
-    def build_agile_payload(guid, date):
-        """Build the parameters for the WebSales URL request.
-
-        Parameters
-        ---------
-        guid : str
-            The unique identifier for the Entry Point link in the Agile system.
-        date : str
-            The date for which to pull showtimes.
-
-        Returns
-        -------
-        payload
-            The parameters to send in the URL's query string as a dictionary.
-
-        """
-        payload = {'guid': guid, 'showslist': 'true', 'format': 'json',
-                   'startdate': date, 'enddate': date}
-
-        return payload
-
     def from_agile_dict(event):
         """Instantiate both AgileEvent and AgileSchedule.
 
@@ -73,13 +52,16 @@ class AgileEvent(FilmEvent):
 
         return AgileEvent(name, showtimes, film_link, duration)
 
-    def fetch_agile_events(payload):
+    def fetch_agile_events(guid, date):
         """Make a request to the Agile WebSales Feed and build a list of films.
 
         Parameters
         ----------
-        payload : dict
-            The parameters to send in the URL's query string as a dictionary.
+        guid : str
+            The unique identifier for the Entry Point link in the Agile system.
+            This determines which venue to poll (CGAC or OMB).
+        date : str
+            The date for which to pull showtimes.
 
         Returns
         -------
@@ -90,7 +72,11 @@ class AgileEvent(FilmEvent):
             alphabetically.
 
         """
+
+        payload = {'guid': guid, 'showslist': 'true', 'format': 'json',
+                   'startdate': date, 'enddate': date}
         base_agile_url = 'https://prod3.agileticketing.net/websales/feed.ashx?'
+
         response = requests.get(base_agile_url, params=payload)
         feed = response.json()
         films = []

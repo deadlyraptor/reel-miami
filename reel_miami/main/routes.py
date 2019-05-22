@@ -11,14 +11,8 @@ main = Blueprint('main', __name__)
 def index():
     today = datetime.today().strftime('%Y-%m-%d')
 
-    # Build the URLs needed to access the WebSales Feed.
-    cgac_feed_url = agile.AgileEvent.build_agile_payload(Config.CGAC_GUID,
-                                                         today)
-    omb_feed_url = agile.AgileEvent.build_agile_payload(Config.OMB_GUID, today)
-
-    # Return the actual WebSales Feed (JSON).
-    cgac_films = agile.AgileEvent.fetch_agile_events(cgac_feed_url)
-    omb_films = agile.AgileEvent.fetch_agile_events(omb_feed_url)
+    cgac_films = agile.AgileEvent.fetch_agile_events(Config.CGAC_GUID, today)
+    omb_films = agile.AgileEvent.fetch_agile_events(Config.OMB_GUID, today)
 
     mbc_films = mbc.MBCEvent.fetch_mbc_events(today)
 
