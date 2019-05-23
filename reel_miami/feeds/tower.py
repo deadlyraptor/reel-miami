@@ -1,4 +1,3 @@
-from datetime import datetime
 import dateutil.parser
 import requests
 from bs4 import BeautifulSoup
@@ -30,7 +29,7 @@ def fetch_tower_events(today):
     # The date passed in by the route is in a format different from the date
     # string in the HTML document so the passed in date has to be reformatted
     # to match the HTML document's version.
-    new_today = datetime.strptime(today, '%Y-%m-%d').strftime('%A %-d, %B')
+    new_today = today.strftime('%A %-d, %B')
 
     films = []
     # get all the dates in the document in order to find the desired one

@@ -1,0 +1,32 @@
+<div class="datepicker-container">
+  <form method="POST" class="datepicker">
+    <button class="date-button" name="date" value="{{ today }}">
+      <span class="datepicker-day">{{ today|format_day }}</span>
+      <span class="datepicker-date">{{ today|format_date }}</span>
+    </button>
+    <button class="date-button" name="date" value="{{ today + timedelta(days=1) }}">
+      <span class="datepicker-day">{{ (today + timedelta(days=1))|format_day }}</span>
+      <span class="datepicker-date">{{ (today + timedelta(days=1))|format_date }}</span>
+    </button>
+    <button class="date-button" name="date" value="{{ today + timedelta(days=2) }}">
+      <span class="datepicker-day">{{ (today + timedelta(days=2))|format_day }}</span>
+      <span class="datepicker-date">{{ (today + timedelta(days=2))|format_date }}</span>
+    </button>
+    <button class="date-button" name="date" value="{{ today + timedelta(days=3) }}">
+      <span class="datepicker-day">{{ (today + timedelta(days=3))|format_day }}</span>
+      <span class="datepicker-date">{{ (today + timedelta(days=3))|format_date }}</span>
+    </button>
+    <button class="date-button" name="date" value="{{ today + timedelta(days=4) }}">
+      <span class="datepicker-day">{{ (today + timedelta(days=4))|format_day }}</span>
+      <span class="datepicker-date">{{ (today + timedelta(days=4))|format_date }}</span>
+    </button>
+    <button class="date-button" name="date" value="{{ today + timedelta(days=7) }}">
+      <span class="datepicker-day">{{ (today + timedelta(days=5))|format_day }}</span>
+      <span class="datepicker-date">{{ (today + timedelta(days=5))|format_date }}</span>
+    </button>
+    <button class="date-button" name="date" value="{{ today + timedelta(days=6) }}">
+      <span class="datepicker-day">{{ (today + timedelta(days=6))|format_day }}</span>
+      <span class="datepicker-date">{{ (today + timedelta(days=6))|format_date }}</span>
+    </button>
+  </form>
+</div>

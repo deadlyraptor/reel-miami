@@ -14,9 +14,12 @@ body {
   align-items: center;
   padding-top: 67px;
 
+  background-color: #fbfbfb;
+
   font-family: 'Roboto', sans-serif;
 }
 
+/* navbar styles */
 .main-navbar {
   position: fixed;
   display: flex;
@@ -44,6 +47,7 @@ body {
   margin: 50px 50px;
 }
 
+/* venue listing styles */
 .venues-container {
   display: flex;
   flex-direction: column;
@@ -62,6 +66,7 @@ and in a column centered to the page */
   margin-bottom: 10px;
 }
 
+/* screening styles */
 .screening {
   flex: 0 50%;
   margin-bottom: 20px;
@@ -84,6 +89,7 @@ and in a column centered to the page */
   margin-right: 20px;
 }
 
+/* link styles */
 a:link,
 a:visited {
   color: #5d6063;
@@ -92,4 +98,39 @@ a:visited {
 
 a:hover {
   text-decoration: underline;
+}
+
+/* datepicker styles */
+.datepicker-container {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 30px;
+  padding: 15px;
+}
+
+.datepicker button {
+  margin-top: 10px;
+  padding: 8px;
+
+  font-weight: bold;
+  width: 105px;
+  border: none;
+  color: #ffffff;
+  background-color: #7a7c7f;
+  cursor: pointer;
+
+}
+
+.datepicker button:hover {
+  background-color: #5d6063;
+}
+
+.datepicker button:active {
+  background-color: #4d4f52;
+}
+
+.datepicker-day,
+.datepicker-date {
+  display: block;
+  padding: 3px;
 }

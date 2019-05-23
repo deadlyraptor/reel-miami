@@ -28,6 +28,45 @@ def format_showtime(value):
 
 
 @filters.app_template_filter()
+def format_date(value):
+    """Format date object to a string.
+
+    Parameters
+    ----------
+    value : date object
+        The date to format.
+
+    Returns
+    -------
+    date
+        The date as month (abbreviated) and day of month as a number (stripped
+        of leading zero).
+
+    """
+    date = value.strftime('%b %d').lstrip('0')
+    return date
+
+
+@filters.app_template_filter()
+def format_day(value):
+    """Format date object to a day string.
+
+    Parameters
+    ----------
+    value : date object
+        The date to format.
+
+    Returns
+    -------
+    date
+        The weekday as full name, e.g. Sunday.
+
+    """
+    date = value.strftime('%A')
+    return date
+
+
+@filters.app_template_filter()
 def format_runtime(value):
     """Reformat the runtime of a film from minutes to hour & minutes.
 

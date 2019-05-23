@@ -123,6 +123,7 @@ class MBCEvent(FilmEvent):
         films = []
         events = feed.entries
         temp_films = []
+
         for event in events:
             if event.title not in temp_films:
                 temp_films.append(event.title)
@@ -131,7 +132,7 @@ class MBCEvent(FilmEvent):
                 parsed_date = datetime.strptime(showtime,
                                                 '%a, %d %b %Y %H:%M:%S %Z')
                 est = MBCEvent.gmt_to_local(parsed_date)
-                if est.strftime('%Y-%m-%d') == date:
+                if est.strftime('%Y-%m-%d') == date.strftime('%Y-%m-%d'):
                     film = MBCEvent.from_mbc_feed(event)
                     films.append(film)
             elif event.title in temp_films:
@@ -140,7 +141,7 @@ class MBCEvent(FilmEvent):
                 parsed_date = datetime.strptime(showtime,
                                                 '%a, %d %b %Y %H:%M:%S %Z')
                 est = MBCEvent.gmt_to_local(parsed_date)
-                if est.strftime('%Y-%m-%d') == date:
+                if est.strftime('%Y-%m-%d') == date.strftime('%Y-%m-%d'):
                     start_time = MBCSchedule.parse_start_time(event)
                     ticketing_link = event.link
                     showtime = MBCSchedule(start_time, ticketing_link)
