@@ -9,7 +9,7 @@ class Venue(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     address1 = db.Column(db.String, nullable=False)
-    address2 = db.Column(db.String, nullable=False)
+    address2 = db.Column(db.String, nullable=True)
     city = db.Column(db.String, nullable=False)
     state = db.Column(db.String, nullable=False)
     postal_code = db.Column(db.String, nullable=False)
