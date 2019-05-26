@@ -55,3 +55,9 @@ def index():
 def about():
     """Render the about page."""
     return render_template('about.html', title='About')
+
+
+@main.route('/venues')
+def venues():
+    """Render the page listing all venues."""
+    return render_template('venues.html', title='Venues')

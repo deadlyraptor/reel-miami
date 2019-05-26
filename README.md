@@ -1,8 +1,8 @@
 Reel Miami
 ==========
 
-An open-source website listing all films and their screening times at art house
-cinemas in Miami-Dade County. It deliberately excludes films showing at the multiplexes.
+Reel Miami is a resource to promote film culture in Miami-Dade County, primarily
+ by centralizing a list of all specialty films shown throughout Greater Miami.
 
 Built With
 ----------

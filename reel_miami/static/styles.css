@@ -29,7 +29,7 @@ body {
   justify-content: space-between;
 
   top: 0;
-  width: 60%;
+  width: 100%;
   padding: 15px;
 }
 
@@ -124,4 +124,23 @@ a:hover {
 .datepicker-date {
   display: block;
   padding: 3px;
+}
+
+/* venues page styles */
+.venue-grid-container {
+  display: flex;
+  justify-content: center;
+}
+
+.venue-grid {
+  width: 1200px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.venue-grid-item {
+  width: 400px;
+  height: 215px;
+  margin-bottom: 10px;
 }
