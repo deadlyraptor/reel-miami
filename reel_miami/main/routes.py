@@ -49,3 +49,9 @@ def index():
                            mbc_films=mbc_films,
                            tower_films=tower_films,
                            cosford_films=cosford_films)
+
+
+@main.route('/about')
+def about():
+    """Render the about page."""
+    return render_template('about.html', title='About')

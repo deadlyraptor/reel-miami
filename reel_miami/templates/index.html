@@ -1,77 +1,72 @@
 {% extends 'base.html' %}
-{%block title %}{{ title }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 {% block content %}
-  <div class="intro">
-    <p>This open-source website lists all films and their screening times at
-       art house cinemas in Miami-Dade County.
-    </p>
+{% include "snippets/date-picker-snippet.html" %}
+<div class="venues-container">
+  <!-- Coral Gables Art Cinema -->
+  <div class="venue-container">
+    <div class="venue-name">
+      <h3><a href="http://gablescinema.com">Coral Gables Art Cinema</a></h3>
+    </div>
+    {% if cgac_films %}
+      {% for film in cgac_films %}
+        {% include "snippets/film-snippet.html" %}
+      {% endfor %}
+    {% else %}
+      {% include "snippets/no-films-snippet.html" %}
+    {% endif %}
   </div>
-  {% include "snippets/date-picker-snippet.html" %}
-  <div class="venues-container">
-    <!-- Coral Gables Art Cinema -->
-    <div class="venue-container">
-      <div class="venue-name">
-        <h3><a href="http://gablescinema.com">Coral Gables Art Cinema</a></h3>
-      </div>
-      {% if cgac_films %}
-        {% for film in cgac_films %}
-          {% include "snippets/film-snippet.html" %}
-        {% endfor %}
-      {% else %}
-        {% include "snippets/no-films-snippet.html" %}
-      {% endif %}
+  <!-- O Cinema Miami Beach -->
+  <div class="venue-container">
+    <div class="venue-name">
+      <h3><a href="https://www.o-cinema.org/">O Cinema Miami Beach</a></h3>
     </div>
-    <!-- O Cinema Miami Beach -->
-    <div class="venue-container">
-      <div class="venue-name">
-        <h3><a href="https://www.o-cinema.org/">O Cinema Miami Beach</a></h3>
-      </div>
-      {% if omb_films %}
-        {% for film in omb_films %}
-          {% include "snippets/film-snippet.html" %}
-        {% endfor %}
-      {% else %}
-        {% include "snippets/no-films-snippet.html" %}
-      {% endif %}
-    </div>
-    <!-- Miami Beach Cinematheque -->
-    <div class="venue-container">
-      <div class="venue-name">
-        <h3><a href="http://mbcinema.com/">Miami Beach Cinematheque</a></h3>
-      </div>
-      {% if mbc_films %}
-        {% for film in mbc_films %}
-            {% include "snippets/film-snippet.html" %}
-        {% endfor %}
-      {% else %}
-        {% include "snippets/no-films-snippet.html" %}
-      {% endif %}
-    </div>
-    <!-- Tower Theater Miami -->
-    <div class="venue-container">
-      <div class="venue-name">
-        <h3><a href="https://towertheatermiami.com">Tower Theater Miami</a></h3>
-      </div>
-      {% if tower_films %}
-        {% for film in tower_films %}
-          {% include "snippets/film-snippet.html" %}
-        {% endfor %}
-      {% else %}
-        {% include "snippets/no-films-snippet.html" %}
-      {% endif %}
-    </div>
-    <!-- Cosford Cinema -->
-    <div class="venue-container">
-      <div class="venue-name">
-        <h3><a href="http://www.cosfordcinema.com/">Cosford Cinema</a></h3>
-      </div>
-      {% if cosford_films %}
-        {% for film in cosford_films %}
-          {% include "snippets/film-snippet.html" %}
-        {% endfor %}
-      {% else %}
-        {% include "snippets/no-films-snippet.html" %}
-      {% endif %}
-    </div>
+    {% if omb_films %}
+      {% for film in omb_films %}
+        {% include "snippets/film-snippet.html" %}
+      {% endfor %}
+    {% else %}
+      {% include "snippets/no-films-snippet.html" %}
+    {% endif %}
   </div>
+  <!-- Miami Beach Cinematheque -->
+  <div class="venue-container">
+    <div class="venue-name">
+      <h3><a href="http://mbcinema.com/">Miami Beach Cinematheque</a></h3>
+    </div>
+    {% if mbc_films %}
+      {% for film in mbc_films %}
+        {% include "snippets/film-snippet.html" %}
+      {% endfor %}
+    {% else %}
+      {% include "snippets/no-films-snippet.html" %}
+    {% endif %}
+  </div>
+  <!-- Tower Theater Miami -->
+  <div class="venue-container">
+    <div class="venue-name">
+      <h3><a href="https://towertheatermiami.com">Tower Theater Miami</a></h3>
+    </div>
+    {% if tower_films %}
+      {% for film in tower_films %}
+        {% include "snippets/film-snippet.html" %}
+      {% endfor %}
+    {% else %}
+      {% include "snippets/no-films-snippet.html" %}
+    {% endif %}
+  </div>
+  <!-- Cosford Cinema -->
+  <div class="venue-container">
+    <div class="venue-name">
+      <h3><a href="http://www.cosfordcinema.com/">Cosford Cinema</a></h3>
+    </div>
+    {% if cosford_films %}
+      {% for film in cosford_films %}
+        {% include "snippets/film-snippet.html" %}
+      {% endfor %}
+    {% else %}
+      {% include "snippets/no-films-snippet.html" %}
+    {% endif %}
+  </div>
+</div>
 {% endblock content %}
