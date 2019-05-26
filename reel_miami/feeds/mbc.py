@@ -1,8 +1,10 @@
 from dataclasses import dataclass
 from datetime import datetime, timezone
+
 import feedparser
-from .film import FilmEvent, FilmSchedule
+
 from config import Config
+from .film import FilmEvent, FilmSchedule
 
 
 @dataclass

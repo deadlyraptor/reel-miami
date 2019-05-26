@@ -1,6 +1,8 @@
 from dataclasses import dataclass
+
 import dateutil.parser
 import requests
+
 from .film import FilmEvent, FilmSchedule
 
 

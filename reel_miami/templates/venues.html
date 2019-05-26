@@ -5,8 +5,8 @@
   <div class="venue-grid">
     {% for venue in venues %}
       <div class="venue-grid-item">
-        <img src="{{ venue.venue_photo }}" />
-        <p>{{ venue.name }}</p>
+        <a href="{{ url_for('main.venue', id=venue.id) }}"><img src="{{ venue.venue_photo }}" /></a>
+        <a href="{{ url_for('main.venue', id=venue.id) }}"><p>{{ venue.name }}</p></a>
       </div>
     {% endfor %}
   </div>

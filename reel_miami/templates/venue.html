@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock title %}
+{% block content %}
+<div class="venue">
+  <img src="{{ venue.venue_photo }}" />
+  <p>{{ venue.name }}</p>
+  <address>
+    {{ venue.address1 }}<br />
+      {% if venue.address2 %}
+        {{ venue.address2 }}<br />
+      {% endif %}
+    {{ venue.city }}, {{ venue.state }} {{ venue.postal_code }}
+  </address><br />
+  <p>{{ venue.description }}</p>
+</div>
+{% endblock content %}

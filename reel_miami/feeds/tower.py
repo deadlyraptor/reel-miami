@@ -1,8 +1,9 @@
+from bs4 import BeautifulSoup
 import dateutil.parser
 import requests
-from bs4 import BeautifulSoup
-from .film import FilmEvent, FilmSchedule
+
 from config import Config
+from .film import FilmEvent, FilmSchedule
 
 
 def fetch_tower_events(today):

@@ -70,3 +70,15 @@ def venues():
         return redirect(url_for('main.index'))
 
     return render_template('venues.html', title='Venues', venues=venues)
+
+
+@main.route('/venue/<int:id>')
+def venue(id):
+    """Render the page for a venue."""
+    venue = Venue.query.filter_by(id=id).first_or_404()
+
+    if not venue:
+        flash('No venue found.', 'warning')
+        return redirect(url_for('main.venues'))
+
+    return render_template('venue.html', venue=venue)
