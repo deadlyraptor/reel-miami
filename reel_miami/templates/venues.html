@@ -3,26 +3,12 @@
 {% block content %}
 <div class="venue-grid-container">
   <div class="venue-grid">
-    <div class="venue-grid-item">
-      <img src="https://placedog.net/350/175" />
-      <p>Coral Gables Art Cinema</p>
-    </div>
-    <div class="venue-grid-item">
-      <img src="https://placedog.net/350/175" />
-      <p>Cosford Cinema</p>
-    </div>
-    <div class="venue-grid-item">
-      <img src="https://placedog.net/350/175" />
-      <p>O Cinema Miami Beach</p>
-    </div>
-    <div class="venue-grid-item">
-      <img src="https://placedog.net/350/175" />
-      <p>Miami Beach Cinematheque</p>
-    </div>
-    <div class="venue-grid-item">
-      <img src="https://placedog.net/350/175" />
-      <p>Tower Theater Miami</p>
-    </div>
+    {% for venue in venues %}
+      <div class="venue-grid-item">
+        <img src="{{ venue.venue_photo }}" />
+        <p>{{ venue.name }}</p>
+      </div>
+    {% endfor %}
   </div>
 </div>
 {% endblock content %}

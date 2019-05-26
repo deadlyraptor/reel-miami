@@ -1,8 +1,11 @@
 from datetime import date, timedelta
+
 import dateutil
-from flask import Blueprint, render_template, request
-from ..feeds import agile, mbc, tower, cosford
+from flask import Blueprint, flash, redirect, render_template, request, url_for
+
 from config import Config
+from ..feeds import agile, mbc, tower, cosford
+from reel_miami.models import Venue
 
 main = Blueprint('main', __name__)
 
@@ -60,4 +63,10 @@ def about():
 @main.route('/venues')
 def venues():
     """Render the page listing all venues."""
-    return render_template('venues.html', title='Venues')
+    venues = Venue.query.all()
+
+    if not venues:
+        flash('No venues found.', 'warning')
+        return redirect(url_for('main.index'))
+
+    return render_template('venues.html', title='Venues', venues=venues)
