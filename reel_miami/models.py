@@ -16,6 +16,8 @@ class Venue(db.Model):
     description = db.Column(db.String, nullable=False)
     venue_photo = db.Column(db.String(20), nullable=False,
                             default='default.jpg')
+    web_url = db.Column(db.String, nullable=True)
+    phone_number = db.Column(db.String, nullable=True)
 
     films = db.relationship('Film', backref='venue', lazy=True)
 
