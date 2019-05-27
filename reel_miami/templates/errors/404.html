@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock title %}
+{% block content %}
+<div class="404">
+  <p>Sorry! The page you were looking for doesn't exist.</p>
+  <p>Return to <a href="url_for('main.index')">homepage</a>.</p>
+</div>
+{% endblock content %}

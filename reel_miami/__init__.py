@@ -26,7 +26,9 @@ def create_app(config_class=Config):
 
     from reel_miami.main.routes import main
     from reel_miami.utils.filters import filters
+    from reel_miami.errors.handlers import errors
     app.register_blueprint(main)
     app.register_blueprint(filters)
+    app.register_blueprint(errors)
 
     return app
