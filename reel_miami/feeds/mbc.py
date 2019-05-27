@@ -31,12 +31,8 @@ class MBCEvent(FilmEvent):
         title : str
             The raw title from the RSS feed.
 
-            MBC events are titled in one of two ways. The conditional block
-            accounts for both formats and splits the text accordingly.
-
-            Examples titles:
-            Miami Theatrical Premiere! THE ROOM by Tommy Wiseau
-            "BAD MOVIES 101" A series: THE ROOM by Tommy Wiseau
+            MBC events are titled in several ways. The conditional blocks
+            check for each of them and formats the string accordingly.
 
         Returns
         -------
@@ -47,8 +43,9 @@ class MBCEvent(FilmEvent):
         if title.startswith('"'):
             # "BAD MOVIES 101" A Series: THE ROOM by Tommy Wiseau
             name = title.split(': ')[1].split(' by')[0].title()
-        elif '! ' and ' by' in title:
+        elif '! ' in title:
             # Miami Theatrical Premiere! THE ROOM by Tommy Wiseau
+            # Miami Theatrical Premiere! THE ROOM
             name = title.split('! ')[1].split(' by')[0].title()
             if '(' in name:
                 # Miami Theatrical Premiere! THE ROOM (11 January 1900)
