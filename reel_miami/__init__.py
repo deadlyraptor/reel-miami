@@ -2,7 +2,6 @@
 
 from flask import Flask
 from flask_admin import Admin
-from flask_admin.contrib.sqla import ModelView
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from config import Config
@@ -22,7 +21,7 @@ def create_app(config_class=Config):
     migrate.init_app(app, db)
     admin.init_app(app)
 
-    admin.add_view(ModelView(models.Venue, db.session))
+    admin.add_view(models.AdminVenue(models.Venue, db.session))
 
     from reel_miami.main.routes import main
     from reel_miami.utils.filters import filters

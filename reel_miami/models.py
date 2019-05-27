@@ -1,6 +1,11 @@
 # models.py
 
+from flask_admin.contrib.sqla import ModelView
+from wtforms import TextAreaField
+
 from reel_miami import db
+
+# Database models
 
 
 class Venue(db.Model):
@@ -63,3 +68,33 @@ class Showtime(db.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+"""
+The following classes modify the primary Flask-Admin ModelView in order to
+accomplish various low-level changes, such as relabeling columns, adding
+specific wtform fields, and placeholder text.
+"""
+
+
+class AdminVenue(ModelView):
+    column_labels = dict(address1='Address', address2='',
+                         web_url='Website')
+    form_overrides = {'description': TextAreaField}
+    form_widget_args = {'address1': {
+                                     'placeholder': 'Primary address'},
+                        'address2': {
+                                     'placeholder': 'Suite/Bulding/Other'
+                                    },
+                        'description': {
+                                        'rows': 10,
+                                        'style': 'color: black',
+                                        'maxlength': 500,
+                                        'placeholder': 'max 500 characters',
+                                        'spellcheck': 'true'
+                                        },
+                        'phone_number': {
+                                        'placeholder': '123.456.7890'
+                                        }
+                        }
+    form_excluded_columns = ['films']
