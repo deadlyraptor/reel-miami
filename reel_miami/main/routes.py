@@ -81,4 +81,6 @@ def venue(id):
         flash('No venue found.', 'warning')
         return redirect(url_for('main.venues'))
 
-    return render_template('venue.html', venue=venue)
+    venue_photo = url_for('static', filename=f'images/{venue.venue_photo}')
+
+    return render_template('venue.html', venue=venue, venue_photo=venue_photo)
