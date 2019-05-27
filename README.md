@@ -8,9 +8,12 @@ Built With
 ----------
 
 - [Flask](http://flask.pocoo.org)
-- [FlaskSQLAlchemy](https://github.com/pallets/flask-sqlalchemy)
+- [Flask-Admin](https://flask-admin.readthedocs.io/en/latest/#)
+- [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/)
+- [FlaskSQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
 - [requests](https://2.python-requests.org/en/master/)
-- [feedparser](https://github.com/kurtmckee/feedparser)
+- [Beautiful Soup 4](https://www.crummy.com/software/BeautifulSoup/)
+- [feedparser](https://pythonhosted.org/feedparser/)
 
 Contributing
 ------------
@@ -18,7 +21,7 @@ Contributions are welcome! Please open an issue or make a pull request.
 
 Authors
 -------
-- **Javier Chavez**
+- [Javier Chavez](https://github.com/deadlyraptor)
 
 License
 -------
