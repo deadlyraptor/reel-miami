@@ -103,6 +103,6 @@ class AdminVenue(ModelView):
             'venue_photo': form.ImageUploadField(
                 'Venue Photo',
                 base_path=Config.VENUE_PHOTOS_DIR,
-                url_relative_path='images/',
+                url_relative_path='images/venues/',
             )
         }

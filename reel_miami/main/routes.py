@@ -20,7 +20,7 @@ def context_processor():
     """
     today = date.today()
 
-    return dict(today=today, timedelta=timedelta)
+    return {'today': today, 'timedelta': timedelta}
 
 
 @main.route('/', methods=['GET', 'POST'])
@@ -81,6 +81,7 @@ def venue(id):
         flash('No venue found.', 'warning')
         return redirect(url_for('main.venues'))
 
-    venue_photo = url_for('static', filename=f'images/{venue.venue_photo}')
+    venue_photo = url_for('static',
+                          filename=f'images/venues/{venue.venue_photo}')
 
     return render_template('venue.html', venue=venue, venue_photo=venue_photo)
