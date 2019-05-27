@@ -2,6 +2,7 @@
 
 from flask import Flask
 from flask_admin import Admin
+from flask_admin.base import MenuLink
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
@@ -9,7 +10,7 @@ from config import Config
 
 db = SQLAlchemy()
 migrate = Migrate()
-admin = Admin()
+admin = Admin(name='Reel Miami', template_mode='bootstrap3')
 
 
 def create_app(config_class=Config):
@@ -23,6 +24,7 @@ def create_app(config_class=Config):
     admin.init_app(app)
 
     admin.add_view(models.AdminVenue(models.Venue, db.session, 'Venues'))
+    admin.add_link(MenuLink(name='Public Website', url=('/')))
 
     from reel_miami.main.routes import main
     from reel_miami.utils.filters import filters

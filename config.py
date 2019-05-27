@@ -30,3 +30,4 @@ class Config():
     COSFORD_TIX = os.environ.get('COSFORD_TIX')
 
     VENUE_PHOTOS_DIR = os.environ.get('VENUE_PHOTOS_DIR')
+    FLASK_ADMIN_SWATCH = 'cerulean'
