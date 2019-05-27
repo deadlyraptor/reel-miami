@@ -28,3 +28,5 @@ class Config():
 
     # Cosford Cinema base calendar day URL
     COSFORD_TIX = os.environ.get('COSFORD_TIX')
+
+    VENUE_PHOTOS_DIR = os.environ.get('VENUE_PHOTOS_DIR')
