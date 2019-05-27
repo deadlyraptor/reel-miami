@@ -3,6 +3,6 @@
 {% block content %}
 <div class="404">
   <p>Sorry! The page you were looking for doesn't exist.</p>
-  <p>Return to <a href="url_for('main.index')">homepage</a>.</p>
+  <p>Return to <a href="{{ url_for('main.index') }}">homepage</a>.</p>
 </div>
 {% endblock content %}

@@ -43,7 +43,7 @@ def format_date(value):
         of leading zero).
 
     """
-    date = value.strftime('%b %d').lstrip('0')
+    date = value.strftime('%b %-d')
     return date
 
 
