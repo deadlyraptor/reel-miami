@@ -81,6 +81,9 @@ make relatively minor changes to the bass class.
 class AdminVenue(ModelView):
     column_labels = {'address1': 'Address', 'address2': 'Address 2',
                      'web_url': 'Website'}
+    column_default_sort = 'name'
+    column_exclude_list = ('description')
+    form_excluded_columns = ['films']
     form_overrides = {'description': TextAreaField}
     form_widget_args = {'address1': {
                                      'placeholder': 'Primary address'},
@@ -98,7 +101,6 @@ class AdminVenue(ModelView):
                                         'placeholder': '123.456.7890'
                                         }
                         }
-    form_excluded_columns = ['films']
     form_extra_fields = {
             'venue_photo': form.ImageUploadField(
                 'Venue Photo',
