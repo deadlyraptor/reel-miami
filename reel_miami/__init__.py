@@ -12,7 +12,7 @@ from config import Config
 
 db = SQLAlchemy()
 migrate = Migrate()
-admin = Admin(name='Reel Miami', base_template='my_master.html',
+admin = Admin(name='Admin', base_template='admin_master.html',
               template_mode='bootstrap3')
 
 
@@ -32,7 +32,7 @@ def create_app(config_class=Config):
     admin.add_view(models.AdminVenueView(models.Venue, db.session, 'Venues'))
     admin.add_view(models.AdminRoleView(models.Role, db.session, 'Roles'))
     admin.add_view(models.AdminUserView(models.User, db.session, 'Users'))
-    admin.add_link(MenuLink(name='Public Website', url=('/')))
+    admin.add_link(MenuLink(name='Reel Miami', url=('/')))
 
     @security.context_processor
     def security_context_processor():
