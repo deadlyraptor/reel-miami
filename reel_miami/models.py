@@ -1,7 +1,9 @@
 # models.py
 
+from flask import abort, redirect, request, url_for
 from flask_admin import form
 from flask_admin.contrib.sqla import ModelView
+from flask_security import current_user, RoleMixin, UserMixin
 from wtforms import TextAreaField
 
 from reel_miami import db
@@ -72,13 +74,48 @@ class Showtime(db.Model):
         return f'{self.name}'
 
 
+'''
+The Flask-Security models that are stored in the database.
+'''
+
+
+roles_users = db.Table('roles_users',
+                       db.Column('user_id', db.Integer(),
+                                 db.ForeignKey('user.id')),
+                       db.Column('role_id', db.Integer(),
+                                 db.ForeignKey('role.id')))
+
+
+class Role(db.Model, RoleMixin):
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(80), unique=True)
+    description = db.Column(db.String(255))
+
+    def __str__(self):
+        return f'{self.name}'
+
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(255), unique=True)
+    password = db.Column(db.String(255))
+    active = db.Column(db.Boolean())
+    confirmed_at = db.Column(db.DateTime())
+    roles = db.relationship('Role', secondary=roles_users,
+                            backref=db.backref('users', lazy='dynamic'))
+
+    def __str__(self):
+        return f'{self.email}'
+
+
 """
 The following classes modify the primary Flask-Admin ModelView in order to
-make relatively minor changes to the bass class.
+accomplish various tasks.
 """
 
 
-class AdminVenue(ModelView):
+class AdminVenueView(ModelView):
+
     column_labels = {'address1': 'Address', 'address2': 'Address 2',
                      'web_url': 'Website'}
     column_default_sort = 'name'
@@ -108,3 +145,66 @@ class AdminVenue(ModelView):
                 url_relative_path='images/venues/',
             )
         }
+
+    def is_accessible(self):
+        return (current_user.is_active
+                and current_user.is_authenticated
+                and (current_user.has_role('Superuser')
+                     or current_user.has_role('User')))
+
+    def _handle_view(self, name, **kwargs):
+        """
+        Override builtin _handle_view in order to redirect users when a view is
+        not accessible.
+        """
+        if not self.is_accessible():
+            if current_user.is_authenticated:
+                # permission denied
+                abort(403)
+            else:
+                # login
+                return redirect(url_for('security.login', next=request.url))
+
+
+class AdminRoleView(ModelView):
+
+    def is_accessible(self):
+        return (current_user.is_active
+                and current_user.is_authenticated
+                and current_user.has_role('Superuser'))
+
+    def _handle_view(self, name, **kwargs):
+        """
+        Override builtin _handle_view in order to redirect users when a view is
+        not accessible.
+        """
+        if not self.is_accessible():
+            if current_user.is_authenticated:
+                # permission denied
+                abort(403)
+            else:
+                # login
+                return redirect(url_for('security.login', next=request.url))
+
+
+class AdminUserView(ModelView):
+
+    column_exclude_list = 'password'
+
+    def is_accessible(self):
+        return (current_user.is_active
+                and current_user.is_authenticated
+                and current_user.has_role('Superuser'))
+
+    def _handle_view(self, name, **kwargs):
+        """
+        Override builtin _handle_view in order to redirect users when a view is
+        not accessible.
+        """
+        if not self.is_accessible():
+            if current_user.is_authenticated:
+                # permission denied
+                abort(403)
+            else:
+                # login
+                return redirect(url_for('security.login', next=request.url))

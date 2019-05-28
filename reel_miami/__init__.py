@@ -1,8 +1,10 @@
 # __init__.py
 
-from flask import Flask
+from flask import Flask, url_for
 from flask_admin import Admin
+from flask_admin import helpers as admin_helpers
 from flask_admin.base import MenuLink
+from flask_security import Security, SQLAlchemyUserDatastore
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
@@ -10,7 +12,8 @@ from config import Config
 
 db = SQLAlchemy()
 migrate = Migrate()
-admin = Admin(name='Reel Miami', template_mode='bootstrap3')
+admin = Admin(name='Reel Miami', base_template='my_master.html',
+              template_mode='bootstrap3')
 
 
 def create_app(config_class=Config):
@@ -23,8 +26,22 @@ def create_app(config_class=Config):
     migrate.init_app(app, db)
     admin.init_app(app)
 
-    admin.add_view(models.AdminVenue(models.Venue, db.session, 'Venues'))
+    user_datastore = SQLAlchemyUserDatastore(db, models.User, models.Role)
+    security = Security(app, user_datastore)
+
+    admin.add_view(models.AdminVenueView(models.Venue, db.session, 'Venues'))
+    admin.add_view(models.AdminRoleView(models.Role, db.session, 'Roles'))
+    admin.add_view(models.AdminUserView(models.User, db.session, 'Users'))
     admin.add_link(MenuLink(name='Public Website', url=('/')))
+
+    @security.context_processor
+    def security_context_processor():
+        return dict(
+            admin_base_template=admin.base_template,
+            admin_view=admin.index_view,
+            h=admin_helpers,
+            get_url=url_for
+            )
 
     from reel_miami.main.routes import main
     from reel_miami.utils.filters import filters

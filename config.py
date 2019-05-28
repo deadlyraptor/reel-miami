@@ -31,3 +31,16 @@ class Config():
 
     VENUE_PHOTOS_DIR = os.environ.get('VENUE_PHOTOS_DIR')
     FLASK_ADMIN_SWATCH = 'cerulean'
+
+    SECURITY_URL_PREFIX = os.environ.get('SECURITY_URL_PREFIX')
+    SECURITY_PASSWORD_HASH = os.environ.get('SECURITY_PASSWORD_HASH')
+    SECURITY_PASSWORD_SALT = os.environ.get('SECURITY_PASSWORD_SALT')
+
+    # Flask-Security URLs, overridden because they don't put a / at the end
+    SECURITY_LOGIN_URL = os.environ.get('SECURITY_LOGIN_URL')
+    SECURITY_LOGOUT_URL = os.environ.get('SECURITY_LOGOUT_URL')
+    SECURITY_POST_LOGIN_VIEW = os.environ.get('SECURITY_POST_LOGIN_VIEW')
+    SECURITY_POST_LOGOUT_VIEW = os.environ.get('SECURITY_POST_LOGOUT_VIEW')
+
+    # Flask-Security features
+    SECURITY_SEND_REGISTER_EMAIL = os.environ.get('SECURITY_SEND_REGISTER_EMAIL')
