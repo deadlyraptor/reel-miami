@@ -10,6 +10,7 @@ Built With
 - [Flask](http://flask.pocoo.org)
 - [Flask-Admin](https://flask-admin.readthedocs.io/en/latest/#)
 - [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/)
+- [Flask-Security](https://pythonhosted.org/Flask-Security/)
 - [FlaskSQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
 - [requests](https://2.python-requests.org/en/master/)
 - [Beautiful Soup 4](https://www.crummy.com/software/BeautifulSoup/)

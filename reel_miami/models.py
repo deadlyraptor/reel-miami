@@ -4,7 +4,7 @@ from flask import abort, redirect, request, url_for
 from flask_admin import form
 from flask_admin.contrib.sqla import ModelView
 from flask_security import current_user, RoleMixin, UserMixin
-from wtforms import TextAreaField
+from wtforms import SelectField, TextAreaField
 
 from reel_miami import db
 from config import Config
@@ -120,6 +120,9 @@ class AdminVenueView(ModelView):
                      'web_url': 'Website'}
     column_default_sort = 'name'
     column_exclude_list = ('description')
+    form_columns = ('name', 'address1', 'address2', 'city', 'state',
+                    'postal_code', 'description', 'web_url', 'phone_number',
+                    'venue_photo')
     form_excluded_columns = ['films']
     form_overrides = {'description': TextAreaField}
     form_widget_args = {'address1': {
@@ -128,7 +131,7 @@ class AdminVenueView(ModelView):
                                      'placeholder': 'Suite/Bulding/Other'
                                     },
                         'description': {
-                                        'rows': 10,
+                                        'rows': 5,
                                         'style': 'color: black',
                                         'maxlength': 1000,
                                         'placeholder': 'max 1000 characters',
@@ -143,7 +146,9 @@ class AdminVenueView(ModelView):
                 'Venue Photo',
                 base_path=Config.VENUE_PHOTOS_DIR,
                 url_relative_path='images/venues/',
-            )
+            ),
+            'state': SelectField(label='State', choices=[('FL', 'Florida')],
+                                 default='FL')
         }
 
     def is_accessible(self):
