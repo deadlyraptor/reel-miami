@@ -1,10 +1,10 @@
 from datetime import date, timedelta
 
 import dateutil
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import Blueprint, current_app, flash, redirect, render_template, \
+    request, url_for
 
-from config import Config
-from ..feeds import agile, mbc, tower, cosford
+from ..feeds import agile, cosford, mbc, tower
 from reel_miami.models import Venue
 
 main = Blueprint('main', __name__)
@@ -35,16 +35,14 @@ def index():
     else:
         date_to_seek = date.today()
 
-    cgac_films = agile.AgileEvent.fetch_agile_events(Config.CGAC_GUID,
+    cgac_films = agile.AgileEvent.fetch_agile_events(current_app.config['CGAC_GUID'],
                                                      date_to_seek)
-    omb_films = agile.AgileEvent.fetch_agile_events(Config.OMB_GUID,
+    omb_films = agile.AgileEvent.fetch_agile_events(current_app.config['OMB_GUID'],
                                                     date_to_seek)
 
-    mbc_films = mbc.MBCEvent.fetch_mbc_events(date_to_seek)
-
-    tower_films = tower.fetch_tower_events(date_to_seek)
-
     cosford_films = cosford.fetch_cosford_events(date_to_seek)
+    mbc_films = mbc.MBCEvent.fetch_mbc_events(date_to_seek)
+    tower_films = tower.fetch_tower_events(date_to_seek)
 
     return render_template('index.html', title='Home',
                            cgac_films=cgac_films,
@@ -82,6 +80,6 @@ def venue(id):
         return redirect(url_for('main.venues'))
 
     venue_photo = url_for('static',
-                          filename=f'images/venues/{venue.venue_photo}')
+                          filename=f'img/venues/{venue.venue_photo}')
 
     return render_template('venue.html', venue=venue, venue_photo=venue_photo)

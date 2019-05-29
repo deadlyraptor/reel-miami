@@ -26,3 +26,9 @@ wheels/
 # Flask stuff:
 instance/
 .webassets-cache
+
+# Configuration
+.env
+
+# Development database
+*.db

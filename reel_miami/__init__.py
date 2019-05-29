@@ -8,7 +8,7 @@ from flask_security import Security, SQLAlchemyUserDatastore
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
-from config import Config
+from settings import Config
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -18,7 +18,7 @@ admin = Admin(name='Admin', base_template='admin_master.html',
 
 def create_app(config_class=Config):
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(config_class)
 
     from reel_miami import models
 
