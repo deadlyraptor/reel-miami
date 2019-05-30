@@ -144,3 +144,21 @@ a:hover {
   height: 215px;
   margin-bottom: 10px;
 }
+
+/* footer styles */
+.footer-grid {
+  display: flex;
+  justify-content: space-between;
+  margin: 48px 0 48px 0;
+  padding-top: 48px;
+  border-top: 1px solid #dee2e6;
+}
+
+.footer-grid-item {
+  padding: 0px 15px 0px 15px;
+  width: 45%;
+}
+
+.footer-nav {
+  list-style: none;
+}

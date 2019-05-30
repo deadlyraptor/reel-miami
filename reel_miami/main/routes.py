@@ -83,3 +83,9 @@ def venue(id):
                           filename=f'img/venues/{venue.venue_photo}')
 
     return render_template('venue.html', venue=venue, venue_photo=venue_photo)
+
+
+@main.route('/admin')
+def admin():
+    """Redirect to the Flask-Admin index page."""
+    return redirect(url_for('main.admin'))
