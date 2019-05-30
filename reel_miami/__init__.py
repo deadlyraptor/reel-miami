@@ -1,30 +1,22 @@
 # __init__.py
 
 from flask import Flask, url_for
-from flask_admin import Admin
 from flask_admin import helpers as admin_helpers
 from flask_admin.base import MenuLink
 from flask_security import Security, SQLAlchemyUserDatastore
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 
-from config import Config
+from reel_miami.extensions import admin, db, migrate
 
-db = SQLAlchemy()
-migrate = Migrate()
-admin = Admin(name='Admin', base_template='admin_master.html',
-              template_mode='bootstrap3')
+from settings import Config
 
 
 def create_app(config_class=Config):
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(config_class)
 
     from reel_miami import models
 
-    db.init_app(app)
-    migrate.init_app(app, db)
-    admin.init_app(app)
+    register_extensions(app)
 
     user_datastore = SQLAlchemyUserDatastore(db, models.User, models.Role)
     security = Security(app, user_datastore)
@@ -51,3 +43,10 @@ def create_app(config_class=Config):
     app.register_blueprint(errors)
 
     return app
+
+
+def register_extensions(app):
+    """Register Flask extensions."""
+    db.init_app(app)
+    migrate.init_app(app, db)
+    admin.init_app(app)

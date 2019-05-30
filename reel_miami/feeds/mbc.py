@@ -2,8 +2,8 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 
 import feedparser
+from flask import current_app
 
-from config import Config
 from .film import FilmEvent, FilmSchedule
 
 
@@ -118,7 +118,7 @@ class MBCEvent(FilmEvent):
             Populated by instances of MBCEvent and MBCSchedule.
 
         """
-        feed = feedparser.parse(Config.MBC_RSS)
+        feed = feedparser.parse(current_app.config['MBC_RSS'])
         films = []
         events = feed.entries
         temp_films = []

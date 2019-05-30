@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 import dateutil.parser
+from flask import current_app
 import requests
 
-from config import Config
 from .film import FilmEvent, FilmSchedule
 
 
@@ -24,7 +24,7 @@ def fetch_tower_events(today):
         A collection of instances of FilmEvent.
 
     """
-    r = requests.get(Config.TOWER_TIX)
+    r = requests.get(current_app.config['TOWER_TIX'])
     soup = BeautifulSoup(r.text, 'html.parser')
 
     # The date passed in by the route is in a format different from the date

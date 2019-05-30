@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 import dateutil.parser
+from flask import current_app
 import requests
 
-from config import Config
 from .film import FilmEvent, FilmSchedule
 
 
@@ -20,7 +20,7 @@ def fetch_cosford_events(date):
         A collection of instances of FilmEvent.
 
     """
-    r = requests.get(f'{Config.COSFORD_TIX}{date}')
+    r = requests.get(f'{current_app.config["COSFORD_TIX"]}{date}')
     soup = BeautifulSoup(r.text, 'html.parser')
 
     films = []

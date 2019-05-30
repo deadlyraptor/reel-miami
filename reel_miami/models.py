@@ -7,7 +7,6 @@ from flask_security import current_user, RoleMixin, UserMixin
 from wtforms import SelectField, TextAreaField
 
 from reel_miami import db
-from config import Config
 
 # Database models
 
@@ -144,8 +143,8 @@ class AdminVenueView(ModelView):
     form_extra_fields = {
             'venue_photo': form.ImageUploadField(
                 'Venue Photo',
-                base_path=Config.VENUE_PHOTOS_DIR,
-                url_relative_path='images/venues/',
+                base_path='reel_miami/static/img/venues',
+                url_relative_path='img/venues/',
             ),
             'state': SelectField(label='State', choices=[('FL', 'Florida')],
                                  default='FL')
