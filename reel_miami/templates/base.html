@@ -18,18 +18,9 @@
 
 <body>
   <!-- Start Navbar -->
-  <nav class="main-navbar">
-    <div class="main-navbar-brand">
-      <a href="{{ url_for('main.index') }}">Reel Miami</a>
-    </div>
-    <ul class="menu">
-      <li><a href="{{ url_for('main.index') }}">Home</a></li>
-      <li><a href="{{ url_for('main.about') }}">About</a></li>
-      <li><a href="{{ url_for('main.venues') }}">Venues</a></li>
-    </ul>
-  </nav>
+  {% include 'nav.html' %}
   <!-- End Navbar -->
-  {% block content%}{% endblock content %}
+
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       <ul class="flashes">
@@ -39,6 +30,9 @@
       </ul>
     {% endif %}
   {% endwith %}
+
+{% block content%}{% endblock content %}
+
 </body>
 
 </html>
