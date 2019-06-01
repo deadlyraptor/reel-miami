@@ -12,38 +12,38 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 80px auto;
-  max-width: 50em;
-  border: 1px solid red;
-
   line-height: 1.5;
-
   background-color: #fbfbfb;
-
   font-family: 'Roboto', sans-serif;
 }
 
-/* navbar styles */
-.main-navbar {
-  position: fixed;
-  display: flex;
-  justify-content: space-between;
 
-  top: 0;
-  width: 100%;
+/* navbar styles */
+.main-nav {
+  display: flex;
+  width: 50%;
+  margin-bottom: 25px;
+}
+
+.menu {
+  display: flex;
+  list-style-type: none;
+}
+
+.menu li {
   padding: 15px;
 }
 
-.menu > li {
-  display: inline;
-  margin-right: 25px;
+.logo {
+  margin-right: auto;
+  padding: 15px;
 }
 
 /* venue listing styles */
 .venues-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  width: 50%;
 } /* the child elements of the venues-container div are rendered with flexbox
 and in a column centered to the page */
 
@@ -60,7 +60,7 @@ and in a column centered to the page */
 
 /* screening styles */
 .screening {
-  flex: 0 50%;
+  flex: 0 1 50%;
   margin-bottom: 20px;
 }
 
@@ -73,12 +73,12 @@ and in a column centered to the page */
 .showtimes {
   display: flex;
   justify-content: flex-start;
-  margin-top: 10px;
+  margin-top: 3%;
   list-style-type: none;
 }
 
 .showtime {
-  margin-right: 20px;
+  margin-right: 5%;
 }
 
 /* link styles */
@@ -94,75 +94,96 @@ a:hover {
 
 /* datepicker styles */
 .datepicker-container {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 30px;
-  padding: 15px;
+  width: 50%;
+  margin-top: 1%;
+  margin-bottom: 2%;
 }
 
-.datepicker button {
-  margin-top: 10px;
-  padding: 8px;
+.datepicker {
+  display: flex;
+  justify-content: space-between;
+}
 
+.date-button {
+  width: 14%;
+  padding: 8px;
   font-weight: bold;
-  width: 105px;
-  border: none;
   color: #ffffff;
   background-color: #7a7c7f;
+  border: none;
   cursor: pointer;
 
-}
+  font-family: 'Roboto', sans-serif;
 
-.datepicker button:hover {
-  background-color: #5d6063;
-}
-
-.datepicker button:active {
-  background-color: #4d4f52;
-}
-
-.datepicker-day,
-.datepicker-date {
-  display: block;
-  padding: 3px;
-}
-
-/* venues page styles */
-.venue-grid-container {
   display: flex;
-  justify-content: center;
-}
-
-.venue-grid {
-  width: 1200px;
-  display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
   flex-wrap: wrap;
 }
 
+.date-button:hover {
+  background-color: #5d6063;
+}
+
+.date-button:active {
+  background-color: #4d4f52;
+}
+
+/* venues page styles */
+.venue-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 50%;
+}
+
 .venue-grid-item {
-  width: 400px;
-  height: 215px;
-  margin-bottom: 10px;
+  margin-bottom: 3%;
+}
+
+.venue-grid-item img {
+  border: 1px solid #5d6063;
+}
+
+/* venue style */
+.venue-listing {
+  display: flex;
+  width: 50%;
+}
+
+.venue-info {
+  margin-left: 15px;
+}
+
+.photo {
+  border: 1px solid #5d6063;
+}
+
+/* about page styles */
+.about {
+  width: 50%;
+  padding: 15px;
 }
 
 /* footer styles */
-.footer-grid {
-  display: flex;
-  justify-content: space-between;
-  margin: 48px 0 48px 0;
-  padding-top: 48px;
-  border-top: 1px solid #dee2e6;
-  width: 100%;
-}
-
-.footer-grid-item {
-  padding: 0px 15px 0px 15px;
-  width: 45%;
-}
-
 .footer-nav {
   display: flex;
-  justify-content: space-between;
-  list-style: none;
+  width: 50%;
+  margin: 48px 0 48px 0;
+  border-top: 1px solid #dee2e6;
+}
+
+.footer-menu {
+  display: flex;
+
+  list-style-type: none;
+}
+
+.footer-menu li {
+  padding: 15px;
+}
+
+.author {
+  margin-right: auto;
+  padding: 15px;
 }

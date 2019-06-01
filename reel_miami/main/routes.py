@@ -60,14 +60,15 @@ def about():
 
 @main.route('/venues')
 def venues():
-    """Render the page listing all venues."""
+    """Render the venue directory page."""
     venues = Venue.query.all()
 
     if not venues:
         flash('No venues found.', 'warning')
         return redirect(url_for('main.index'))
 
-    return render_template('venues.html', title='Venues', venues=venues)
+    return render_template('venue-directory.html', title='Venues',
+                           venues=venues)
 
 
 @main.route('/venue/<int:id>')
@@ -82,7 +83,8 @@ def venue(id):
     venue_photo = url_for('static',
                           filename=f'img/venues/{venue.venue_photo}')
 
-    return render_template('venue.html', venue=venue, venue_photo=venue_photo)
+    return render_template('venue-listing.html', venue=venue,
+                           venue_photo=venue_photo)
 
 
 @main.route('/admin')

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock title %}
+{% block content %}
+<div class="venue-listing">
+  <div class="venue-photo">
+    <img src="{{ venue_photo }}" height="350" width="500" class="photo"/>
+  </div>
+  <div class="venue-info">
+    <p>{{ venue.name }}</p>
+    <p>{{ venue.address1 }}
+      {% if venue.address2 %}
+        {{ venue.address2 }}
+      {% endif %}<br />
+      {{ venue.city }}, {{ venue.state }} {{ venue.postal_code }}
+    </p><br />
+    <p>{{ venue.description }}</p>
+  </div>
+</div>
+{% endblock content %}
