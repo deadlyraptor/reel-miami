@@ -5,7 +5,7 @@ from flask_admin import helpers as admin_helpers
 from flask_admin.base import MenuLink
 from flask_security import Security, SQLAlchemyUserDatastore
 
-from reel_miami.extensions import admin, db, migrate
+from reel_miami.extensions import admin, db, mail, migrate
 
 from settings import Config
 
@@ -48,7 +48,8 @@ def create_app(config_class=Config):
 def register_extensions(app):
     """Register Flask extensions."""
     db.init_app(app)
-    migrate.init_app(app, db)
     admin.init_app(app)
+    mail.init_app(app)
+    migrate.init_app(app, db)
 
     return None

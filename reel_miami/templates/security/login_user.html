@@ -1,7 +1,6 @@
 {% extends 'admin/master.html' %}
 {% from "security/_macros.html" import render_field, render_field_with_errors, render_checkbox_field %}
 {% block body %}
-{% include "security/_messages.html" %}
 {{ super() }}
 <div class="row-fluid">
     <div class="col-sm-8 col-sm-offset-2">
@@ -15,6 +14,7 @@
                 {{ render_field(login_user_form.next) }}
                 {{ render_field(login_user_form.submit, class="btn btn-primary") }}
             </form>
+            <p><a href="{{ url_for_security('forgot_password') }}">Forgot your password?</a></p>
         </div>
     </div>
 </div>

@@ -95,7 +95,6 @@ a:hover {
 /* datepicker styles */
 .datepicker-container {
   width: 50%;
-  margin-top: 1%;
   margin-bottom: 2%;
 }
 
@@ -162,7 +161,7 @@ a:hover {
 /* about page styles */
 .about {
   width: 50%;
-  padding: 15px;
+  padding: 0 15px 0 15px;
 }
 
 /* footer styles */

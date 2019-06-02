@@ -28,6 +28,7 @@ class Config():
 
     # Flask-Admin
     FLASK_ADMIN_SWATCH = os.getenv('FLASK_ADMIN_SWATCH')
+
     # Flask-Security
     SECURITY_URL_PREFIX = os.getenv('SECURITY_URL_PREFIX')
     SECURITY_PASSWORD_HASH = os.getenv('SECURITY_PASSWORD_HASH')
@@ -38,9 +39,18 @@ class Config():
     SECURITY_LOGOUT_URL = os.getenv('SECURITY_LOGOUT_URL')
     SECURITY_POST_LOGIN_VIEW = os.getenv('SECURITY_POST_LOGIN_VIEW')
     SECURITY_POST_LOGOUT_VIEW = os.getenv('SECURITY_POST_LOGOUT_VIEW')
+    SECURITY_POST_RESET_VIEW = os.getenv('SECURITY_POST_RESET_VIEW')
 
     # Flask-Security features
+    SECURITY_RECOVERABLE = os.getenv('SECURITY_RECOVERABLE')
     SECURITY_REGISTER_EMAIL = os.getenv('SECURITY_REGISTER_EMAIL')
+
+    # Flask-Mail
+    MAIL_SERVER = os.getenv('MAIL_SERVER')
+    MAIL_PORT = os.getenv('MAIL_PORT')
+    MAIL_USE_TLS = os.getenv('MAIL_USE_TLS')
+    MAIL_USERNAME = os.getenv('MAIL_USERNAME')
+    MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
 
     # Heroku
     LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')

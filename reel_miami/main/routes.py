@@ -61,7 +61,7 @@ def about():
 @main.route('/venues')
 def venues():
     """Render the venue directory page."""
-    venues = Venue.query.all()
+    venues = Venue.query.order_by(Venue.name).all()
 
     if not venues:
         flash('No venues found.', 'warning')
@@ -84,7 +84,7 @@ def venue(id):
                           filename=f'img/venues/{venue.venue_photo}')
 
     return render_template('venue-listing.html', venue=venue,
-                           venue_photo=venue_photo)
+                           venue_photo=venue_photo, title=venue.name)
 
 
 @main.route('/admin')
