@@ -8,7 +8,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config():
     SECRET_KEY = os.getenv('SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI') or \
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or \
         f'sqlite:///{os.path.join(basedir, "app.db")}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
@@ -41,3 +41,6 @@ class Config():
 
     # Flask-Security features
     SECURITY_REGISTER_EMAIL = os.getenv('SECURITY_REGISTER_EMAIL')
+
+    # Heroku
+    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
