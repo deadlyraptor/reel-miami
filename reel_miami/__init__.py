@@ -6,17 +6,20 @@ from flask_admin.base import MenuLink
 from flask_security import Security, SQLAlchemyUserDatastore
 
 from reel_miami.extensions import admin, db, mail, migrate
+from reel_miami.errors.handlers import errors
+from reel_miami.main.routes import main
+from reel_miami.utils.filters import filters
 
 from settings import Config
+from reel_miami import models
 
 
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
 
-    from reel_miami import models
-
     register_extensions(app)
+    register_blueprints(app)
 
     user_datastore = SQLAlchemyUserDatastore(db, models.User, models.Role)
     security = Security(app, user_datastore)
@@ -35,13 +38,6 @@ def create_app(config_class=Config):
             get_url=url_for
             )
 
-    from reel_miami.main.routes import main
-    from reel_miami.utils.filters import filters
-    from reel_miami.errors.handlers import errors
-    app.register_blueprint(main)
-    app.register_blueprint(filters)
-    app.register_blueprint(errors)
-
     return app
 
 
@@ -51,5 +47,14 @@ def register_extensions(app):
     admin.init_app(app)
     mail.init_app(app)
     migrate.init_app(app, db)
+
+    return None
+
+
+def register_blueprints(app):
+    """Register Flask blueprints."""
+    app.register_blueprint(main)
+    app.register_blueprint(filters)
+    app.register_blueprint(errors)
 
     return None
