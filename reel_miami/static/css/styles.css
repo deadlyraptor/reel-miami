@@ -17,6 +17,9 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+p {
+  margin-bottom: 1em;
+}
 
 /* navbar styles */
 .main-nav {

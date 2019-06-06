@@ -12,7 +12,9 @@
         {{ venue.address2 }}
       {% endif %}<br />
       {{ venue.city }}, {{ venue.state }} {{ venue.postal_code }}
-    </p><br />
+    </p>
+    <p>{{ venue.phone_number }}</p>
+    <p><a href="{{ venue.web_url }}">{{ venue.web_url }}</a></p>
     <p>{{ venue.description }}</p>
   </div>
 </div>
